@@ -4,7 +4,7 @@ import os
 import azure.identity
 import openai
 from agents import Agent, OpenAIChatCompletionsModel, Runner, function_tool, set_tracing_disabled
-from agents.extensions.visualization import draw_graph
+# from agents.extensions.visualization import draw_graph
 from dotenv import load_dotenv
 
 # Disable tracing since we're not using OpenAI.com models
@@ -36,12 +36,6 @@ def get_weather(city: str) -> str:
     }
 
 
-agent = Agent(
-    name="Weather agent",
-    instructions="You can only provide weather information.",
-    tools=[get_weather],
-)
-
 spanish_agent = Agent(
     name="Spanish agent",
     instructions="You only speak Spanish.",
@@ -66,9 +60,9 @@ triage_agent = Agent(
 
 async def main():
     result = await Runner.run(triage_agent, input="Hola, ¿cómo estás? ¿Puedes darme el clima para San Francisco CA?")
-    gz_source = draw_graph(triage_agent, filename="openai_agents_handoffs.png")
-    # save graph to file in graphviz format
-    gz_source.save("openai_agents_handoffs.dot")
+    # gz_source = draw_graph(triage_agent, filename="openai_agents_handoffs.png")
+    # # save graph to file in graphviz format
+    # gz_source.save("openai_agents_handoffs.dot")
 
     print(result.final_output)
 

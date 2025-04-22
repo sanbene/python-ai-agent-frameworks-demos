@@ -11,9 +11,9 @@ client = ChatCompletionsClient(
 
 response = client.complete(
     messages=[
-        SystemMessage(content="You are a helpful assistant."),
+        SystemMessage(content="You are a helpful assistant that always responds in markdown with helpful emphasis."),
         UserMessage(content="What is the capital of France?"),
     ],
-    model=os.getenv("GITHUB_MODEL", "gpt-4o"),
+    model=os.getenv("GITHUB_MODEL", "gpt-4.1"),
 )
 print(response.choices[0].message.content)
